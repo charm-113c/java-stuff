@@ -1,0 +1,147 @@
+Well then, let's make it interesting. Given the known restrictions, our job is to first create interesting mechanics.
+
+Let's imagine a society. What is wealth in this society? It can be big numbers, it can be connections, it can be popularity, it can be either of all of those or all of them at once. Reflecting our society, or rather, allowing ourselves to reflect our society sounds the most fun. You know what would be even more fun? If the definition of happiness were to be slightly different for each person. Some would put more weight on this, others would want more of that.
+We'll be playing God, albeit a powerless one.
+The world is unfair, it has no obligation to give the players the same starting wealth. We will make things modulable, so that we can simulate as many scenarii as we want. Let's break down the three types of wealth we've highlighted.
+No, before we do that... We only have one payoff function, that's what gives the big numbers, so really, we only have two types of wealth: the number of connections and the popularity. That will give high output. You're completely forgetting the fact that messages are numbers. Wait. What will these messages convey? They're singular numbers, meaning they can only convey one thing. Yes, but that thing can very well be wealth; then, based on the wealth transmission, players may choose to change other players' positions or drop them entirely. There is wealth in numbers. While the payoff might ultimately be the quantification of happiness, we can still calculate wealth as a separate function, a function of an initial wealth and the messages sent by other users. Actually, to make thing interesting, we could make it so that the position of other players influences on... no, nevermind. I was about to say that players send their wealth as messages and the position influences what percentage of taht wealth each player takes, but, that sounds off, like it's hard to balance. ...Are you sure? On the contrary, that sounds very interesting to me. Because players send their wealth as messages, it allows other players to choose which position to put one another in the next round. Instead of a society, that makes it a big game, a strange game. It stops being a miniature society, then. Then, think of another meaning.
+For it to mimic society, we need work. We somehow need players to perform some work. In which case we introduce new concepts. But before doing that, we'll need to check if that's sacrilegeous, if game theory likes having new rules thrown into it. Or rather, if there are game theory elements that allow us to do that.
+Alright so I absolutely forgot that this was in fact a game, and what's more, a non-cooperative game, so the above idea you proposed is absolutely valid.
+There's nothing stopping us from adding new mechanics. So long as they don't break the current rules, there's nothing stopping us from adding new rules. Remember, it's a game, a non-cooperative one. Yes, I remember, but nonetheless, I want to mimc a society. Each player has to be able to create value, that's what work is. To bring value to society. But is it not that nothing is created, nothing is lost, all is transformed? Then, we would have an external pool of wealth, from which players can mine. To put it in another way, a game starts with a certain total wealth, but not all of that wealth is distributed to the players, some of it will be left out, available for those who want it, for those who try to get it. And, you can't make money without having money. This is becoming very interesting indeed. In each round, players may choose an action: one of them is working, what will the others be? To work for others... Cliques... Certain players can make others work for them, in exchange for a promise. No, no... You're going way too far. Keep things simple. Let's keep things simple.
+
+You want one message to convey two meanings. You want one message to declare both a player's current wealth, and the action they're taking. Furthermore, do not forget that a player may choose to not send a message at all. And players who don't receive messages die.
+if we were to introduce a new mechanic, that would be a dealer. The game dealer. The dealer would reward certain players, and punish others. At the end of every configuration, the dealer would send a message to all players: the state of each player's closest ally... No. Inventing a game sure is hard. And here I thought it was one of your forte. Players' wealth is private data, or at least they do not have to disclose it. The feedback is then free to represent the action they take. Null means no action taken. The objective is maximum wealth. Wealth would then be popularity and connections.
+Give, take, do nothing. Those are the possible actions. Let's say, give = +1, take = -1, and do nothing = 0. But then, how do players modify their neighbourhoods? How do they decide how to add or remove players, and how to change their acquaintances' positions? Well, you thought of the shuffle as being a multiple of the feedback, but that doesn't help with removal/addition.
+Then... How about making it a massive guessing game. Players have to guess who's the wealthiest, and the dealer rewards or punishes them for their correctness? Let's call the big guy game master, instead of dealer.
+
+The presence of a game master kinda defeats the point of messages and feedbacks. Players know their position in other players' neighbourhoods.
+
+I want each player's choice to be simple. I want each player to decide based on their profile and their position in others' neighbourhoods, and possibly on their wealth too, should there be such a thing. What if... What if each player only gets to give, take or do nothing, and then the game master then modifies each player's position accordingly... Question then is: how does the game master modify each position, and what do positions mean? No, even better: what if the player were to make a guess based on the profile they received? Shit, but how? I want the messages to be meaningful to other players always.
+
+
+
+Let's start with the game master changing the neighbourhoods at the end of each round. That means that the position in a neighbourhood must have a meaning.
+I then have two simple questions: 1) is being close to position 1 a good thing? 2) is having more than one position in a neighbourhood a good thing?
+Can it be like positions in the stock market?
+Something like the stock market... That sounds good... But how do we do that?
+That sounds unoriginal. I want it to be more similar to blackjack. No, blackjack doesn't fit the criteria for non-coop games, so instead, closer to poker? Yes, Poker goes.
+
+What about this: games last a certain number of rounds, and each player is given an undisclosed amount of wealth by the game master. A player may choose to send as message another player's number or 0 to do nothing. For instance, player 5 sending +7 as a message means that player 5 is adding player 7 to their neighbourhood. -3 would instead indicate that they're removing player 3. A player may add another player as many times as they want in their neighbourhood, as long as they have up to k acquaintances. At the end of each round, the game master redistributes players' wealth according to certain criteria we'll think of later. Also, in the beginning each player has every other player as neighbour. Ok, what about wealth redistribution? That is done according to the cards in each players' hands, that is to say, their neighbourhoods. Players give to those who have less than them, and take from those who have more... Meaning they can go bankrupt, and bankrupcy means death. But they can also buy more lives, that is, spawn a player. A special number must be assigned to that. Oh, easy, player 5 can say +5: they're giving themselves more lives. Each birth creates more wealth. An undisclosed amount of wealth. A random amount of wealth. We have something here.
+Thing is, our definition of death is different. Wrong: we just added one more way in which a player can die. And that player's wealth will be distributed evenly among the remaining players. A game ends early when a certain sum is achieved, or, very unlikely, when all players die: that is, everyone somehow removed everyone else from their neighbourhoods.
+Not gonna lie, this sounds like fun.
+
+While it does sound like fun, it comes with a huge problem: in which order are wealth detracted/added? Then, how about a bank. The bank, handled by the game master, has an initial total sum, part of which is given out to the players. Players then take or receive from the bank, according to their total. That is to say, at the end of a turn, the payoff is calculated for all players (or in short, the total amount they gain minus the toal amount they lose in that turn), and only after the calculations are the players' wealth modified. How does one achieve Nash equilibrium here? Don't care, first I care about the feasibility of this game: is it fair? What should we expect? Because this game can absolutely be analyzed. In fact, that's what I want you to do right now. I want you to analyze this game, its expected outcome, and whatnot.
+
+Then first, let's present its mechanics.
+
+
+
+Each game has a board, a universe of k players, a game master, and a total amount of wealth denoted W. Each player is uniquely designated with a number going from 1 to k.
+
+1) Preparatory phase
+At the beginning of a game, every player is active and has k/2 players in their neighbourhood (neighbourhoods have maximum size k, so they're initially half empty). The game master proceeds to distribute at most half of the total wealth (W/2) between the players. The distribution does not have to be equal; in fact, it is very much left to chance. After the distribution, the game may start. The values of W and k are known to all. The players do not know the neighbourhoods of other players nor the wealth of other players. Players will, however, know whenever another player dies and a list of inactive/dead players throughout the rounds will always be available to all.
+
+2) First round
+In the beginning of the first round, the game master announces the names/numbers of the wealthiest player and the poorest player. Other than that, the players do not receive any messages. They will however send a message to all other players: the message is a natural number comprised between -k and k.
+Messages have the following meaning: if player 1 broadcasts the message +3, then player 1 adds player 3 to their neighbourhood; if player 1 broadcasts 0, then player 1 does nothing for the round; if player 1 broadcasts -3, then player 1 is removing player 3 from their neighbourhood. A player may not broadcast their own number. A player may not add another player that is already in their neighbourhood. Important note: if 1 removes 3 from their neighbourhood, then due to symmetry 1 is also removed from 3's neighbourhood; similarly, adding a player also adds oneself to their neighbourhood, in the smallest available position.
+After all players send a message, the first round concludes.
+
+3) Subsequent rounds
+In a round, the following happens:
+	a) Players receive their messages: the game master proceeds to change the players' neighbourhoods according to the profiles. A player's message to oneself is the player's current wealth, calculated by the game master as follows:
+	Consider player d, whose wealth in the previous round t-1 was W_d(t-1). If player e is in d's neighbourhood, then the amount d gains from e in the round t-1 is given by W_e(t-1) - W_d(t-1). In other words, if d is richer than e, then d has to give up the difference in wealth. On the contrary, if d is poorer, then d receives the difference (note: d does not take or receive directly from e, as we'll see). d's total gain is calculated like that for all of d's acquaintances. If this total gain is Delta_d(t-1), then the game master now has to give d that amount from the total wealth W, or in other words we'll have W_d(t) = W_d(t-1) + Delta_d(t-1), and W(t) = W(t-1) - Delta_d(t-1). Note that Delta_d can be negative.
+	If a player's wealth falls below 1, the player is considered bankrupt and dies. A player also dies if they are removed from all neighbourhoods*. The game master removes dead players from all neighbourhoods.
+	b) The game master announces deaths, should there be any, then spawns, should any be successful.
+	c) The game master tosses a coin. If it lands on head, the game master announces the names/numbers of the current wealthiest player and the current poorest player. If it lands on tail, the game master announces the value of the wealths of the current wealthiest and poorest players.
+	d) Players may now consult the history of the wealthiest and poorest players and the history of active/inactive players, as well as the evolution of their own neighbourhood and wealth throughout the rounds.
+    e) Players may now rearrange their neighbourhoods. The above explanation for calculating a player's wealth actually misses one element: the position of a player in the neighbourhood matters. The closer a player is to the position 1 in a neighbourhood, the more importance they are given. To illustrate, consider player d's neighbourhood. Let e be a player in it. d has position 1 in its own neighbourhood, so it gets 100% of its own wealth. If e were in position 2, and the difference in wealth were Delta_de, then d would only gain 0.9*Delta_de. If e were in position 3, it would be 0.8*Delta_de, and the factor would go on decreasing as the position increases. In reality, the factor is determined by the formula (k - position)/(k - 1), with positions going from 1 to k.
+    For this same reason, if e is in d's neighbourhood more than once (as d added them multiple times), then if d is in e's neighbourhood and appeared as (d, i), i would be the smallest of all the positions (i.e. closest to 1) e occupies in d. 
+	f) Players now send their feedback message. They can only send a message to those from whom they've received a message, and they cannot send messages to those who've removed them from their neighbourhoods.
+	Note: a player cannot remove a player that isn't in their neighbourhood.
+	Note: a player may also add another player that is currently inactive: if player e is inactive, then player d can send the message +e to 'revive' player e (if d has less than k players in its neighbourhood). e will be added to d's neighbourhood next round, and everything will proceed as described in a). This implies that if e is bankrupt, then e will die as soon as a) is over and d will just lose wealth from this, so the player to spawn must be chosen wisely.
+	g) After all players send a message, the current round concludes, the next one begins.
+
+4) Game over conditions
+A game ends if any of the following conditions are met:
+	- a given number of rounds have passed
+	- the total amount of wealth W is exhausted
+	- at most two players remain
+The richest remaining upon game over is the winner. If all players die, the game ends in a draw.
+
+*strictly speaking, a player dies if their feedback function is undefined: the feedback function is undefined only when a player cannot send feedback messages (because they've been removed from all neighbourhoods), but the player also receives messages from itself (or in our case, from the game master), the message being the payoff. But when a player is removed from all neighbourhoods, their payoff cannot be calculated, so the player won't receive a message from the game master in the next turn, which will cause their feedback function to be undefined. Knowing this, instead of waiting for a player to die this way in the next turn, the game master 'kills' them earlier than strictly necessary. This is a design choice more than anything: a dying player won't have a grace period in which they can be saved from dying, but they can be spawned back anytime by other players.
+
+
+
+We need that a player cannot go bankrupt in the first few rounds. And we also need to think about the benefits spawning a new player has. Oh, I see. So no new players, but some can be brought back to life. Those who have died not because of bankruptcy, but... Wait, no even those who died of bankruptcy can be brought back to life... Oh, this is becoming very interesting... This implies that a player cannot spawn themselves.
+Can we give the players something to base their first round decision on? Yes, of course: luck. We're not giving them anything.
+
+
+
+
+Game flow:
+
+1. A game is created with as input the number of players k and the total amount of wealth W, as well as the number of rounds r to play.
+2. The game master must initialize each player by assigning them a random share of W/2 and a random neighbourhood of k/2 players (-1 if k is odd).
+3. The first round begins:
+    3.1. The game master announces who the richest and poorest players are.
+    3.2. Each player now has two pieces of information provided by the game master: their profile, and the above announcement.
+    3.3. Each player now checks the game state (they each get W(1) and k) in order to make a decision on the move to make.
+    3.4. Each player can choose to rearrange their neighbourhood.
+    3.5. Each player makes a decision and sends their first message.
+4. The game master records each message and updates the game history by adding this round's data.
+5. The next round begins:
+    5.1. The game master rearranges each neighbourhood according to the previous round's profile.
+    5.2. The game master simultaneously checks if any player has been removed from all neighbourhoods, in which case they're added to the list of inactive players.
+    5.3. The game master computes the gains and losses of each player.
+        5.3.1. If anyone has non-positive wealth, they are removed from all neighbourhoods and added to the list of inactive players.
+        5.3.2. At this point, the game master checks if there are 2 or less players left, in which case a game over condition is reached and we skip to step 7.
+    5.4. The game master tosses a coin: if it lands on head, the wealthiest and poorest players' names are announced. Otherwise, it's the wealths W_d of the richest and poorest players that are announced.
+    5.5. It is now the player's turn to make a move:
+        5.5.1. Each player reads the announcement made by the game master.
+        5.5.2. Each player reads their profile as well as their updated neighbourhood.
+        5.5.3. Each player consults the game's history.
+        5.5.4. Each player can now rearrange their own neighbourhood.
+        5.5.5. Each player decides on a move to play and sends it as this round's feedback message.
+6. The game master updates the number of rounds played: if we haven't reached r, then repeat from step 4. If we have reached r, then:
+7. The game master must now determine the wealthiest player. Feedback messages, should there be any, are ignored. The game master returns the designation of the wealthiest player, or in case of a draw, returns -1.
+
+
+
+A round's history is composed of the following: W(t) being the available wealth, k(t) being the number of players active, the richest and poorest players that round (if available) or the highest and lowest wealths achieved by players that round, a list of the inactive players, and the profile pi(t) that has led to that round.
+
+A player's round history consists of the following: the profile pi_d(t) they received that round, the feedback message sigma_d(t) they sent that round, and their neighbourhood Beta_d(t) that round.
+
+
+
+
+
+
+
+Ideally each game is highly customizable, but we'll worry about that later. For now, build a standard game.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+End

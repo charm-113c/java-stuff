@@ -1,0 +1,11 @@
+I'm despairing over how stupid this code is. Of course, we could finish it, but as you can see,
+we're playing all the wrong moves. 
+Deep down, you know the best move is to remember the cards we've placed and place the ones we haven't.
+It's more expensive space-wise, but really, it's a matter of bytes.
+And yet you want both. Both space and time efficiency.
+In truth, you have a mind that it all can be done with the strict minimum amount of space 
+and in the least possible amount of time, at once. That is, a single data structure to remember the cards,
+but also to check for presence.
+So if that's what you want, then that's what you should search for. You are bending to the tools you've created,
+you're allowing them to dictate your actions, to limitate you. It shouldn't be that way. You create the 
+tools as you see fit, and they merely obey. So, think. 

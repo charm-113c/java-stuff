@@ -1,0 +1,91 @@
+Let's put it down in simpler words. It's a game with a board whose state changes from stage to stage. Rather than a game, it's as the name implies, a system.
+Our job will be to implement this system. The board is composed of players, and players themselves are from a universe (we call it U), a set.
+
+
+Players
+    Each player has a neighbourhood, a circle of a maximum of k acquaintances. It's basically a tuple of tuples, and if the player is represented by metavariables d, e, etc... d's neighbourhood will be of the format: ((d, 1), (e, e_d), (f, f_d), ...).
+        To explain the inner tuples: the fist tuple will be the player d itself, and 1 is the position d occupies in d's neighbourhood. Let's explain this through a metaphor: the closer to 1 a player's index is, the closer we may consider the players to be. So d having position 1 in its own neighbourhood means d is the closest player to itself. But relationship with others is a two-way thing, and not all love is reciprocal: that d feels close to e doesn't mean that e feels the same for d. So in the tuple (e, e_d), e is the player, and e_d is how close e feels d is to itself. In more rigourous terms, this 'closeness' (i.e. the value of e_d) is the index of d in e's neighbourhood. The index is referred to as position, and positions may or may not be empty. That was just a metaphor, however: d's position in e's neighbourhood doesn't indicate closeness, or at least, nothing says that it does, it's just a possible interpretation. An interpretation made strange by the fact that d may hold multiple positions in e's neighbourhood.
+
+The board
+The board has a profile, which leverages the concept of neighbourhoods. Mathematically, the neighbourhoods and profiles are both represented by partial functions.
+    For the former, the function is a relational board β such that β(d) gives neighbourhood of d. The domain of β is the universe of all players, but β itself is a partial function, meaning it only takes from a subset of U (although that subset can be all of U).
+    The profile function (henceforth, π) is very similar, it's also a tuple, but π(d) is a tuple of integers instead of a tuple of tuples. So we'd have:
+                                                            π(d) = (π_d1, π_d2, ..., π_dk)
+    where pi_dj, for 1 <= j <= k, is a message d receives from the player in index j in d's neighbourhood. π_d1 being a message from d to itself, it can be viewed as a wealth or payoff function.
+The game state which we talked of in the beginning, which we will now call "game configuration", can thus be formalized as a pair (β, π) of partial functions.
+
+
+These are the tools we'll need to implement a social game system, so now let's explain the mechanics.
+Players interact between each other, they may make new acquaintances, they may make new children, new players may be born, and players may die. Let's begin with the simplest: the spawn function.
+    While not all players in a universe may be active, all of them are endowed with a spawn function. That's it. That's all there is to spawning. There is a spawn function, which may or may not spawn players. The spawn function of a player d is written σ(d). Note: d doesn't spawn itself, it spawns another player. So, it's more of a birthing function, but that sounds less cool.
+Interaction is done in two ways: through the profile function, for a player d to receive messages from its neighbourhood, and through the feedback function.
+    The feedback function (written φ), for a player d, takes as input the messages d receives (that is, it takes as input d's profile function's output), and outputs d's response to all its neighbours. That's why it's called feedback: it outputs d's "answer" to those that sent it a message. As a consequence, it's only natural that φ(d)'s output has the same structure as π(d). This also means that d doesn't answer to empty positions, because empty positions do not send messages.
+Death.
+    Death is a natural part of the life cycle, and here, a player dies when its feedback function is undefined: as a great doctor once said, people die when they are forgotten. So too does a player die when it doesn't receive messages from anyone, and therefore cannot send responses to anyone. When φ is undefined, the player for whom it's undefined is considered dead.
+    The set of players who survive from one configuration to the next is written as ↓(β, π).
+
+
+We talked earlier about how a game configuration can be defined through a pair (β, π) of partial functions: we now say that when a game moves from a configuration (β1, π1) to (β2, π2), it undergoes a "transition". In a transition (β1, π1) -> (β2, π2),
+    1. If a player d is in ↓(β1, π1), then β2(d) is defined: if d survives in (β1, π1), then d is an active player in (β2, π2).
+    2. If a player e is in dom(β2) but not in ↓(β1, π1), then e must belong to σ_d(π1(d)) for some player d in dom(β1): if a player e is spawned, then it has been spawned by some player d in dom(β1).
+    3. Consider players d and e, both survivors of the first configuration (i.e. both in ↓(β1, π1)): the message that e receives from d after the transition is d's feedback from the message that e sent to d before the transition. This implies that players only send and receive messages once per turn (i.e. once per configuration) at most, to one another.
+
+
+Now, there is one last thing we need to discuss: game theory. The social game system we described above has all the elements to make it a 'noncooperative game' in game theory, but it does not have all the restrictions. In game theory, games have three components: a set of players, and for each player, a strategy, and for each strategy, a payoff. In layman terms, there are players, players have a strategy, and they also have a function to tell us how well their strategy pays off.
+Note that in all of this, we lack something very important: an objective. We have not defined what constitutes a good strategy, because we have not defined an objective for players to reach. Of course, one could presume that the objective is to have a high payoff, but then the question is: how is payoff calculated, what is the payoff function? It all then comes down to that: the definition of the payoff function. That will determine whether a strategy is good or not.
+
+In a social game system, the strategies will be the messages that players send. In game theory, we refer to individual strategies as strategy profiles. The paralellism now becomes blatant: we want our social game system's profile to correspond to game theory's.
+To make that happen, we must set a certain restriction: let's say there are three players, d, e and f. As things currently stand, there is nothing that stops d from sending one message to e (say, 'Hi!') and a different one to f (like 'Hello'). In game theory, a player d must have the same strategy everywhere: the message d sends to e must be the same it sends to any other player. More rigourously, if d has position j in e's neighbourhood and h in f's neighbourhood, then:
+                                                            π(e)_j = π(f)_h = s_i
+where s_i is the value of d's strategy...? hold on, what? Yes, a player's strategy is a single integer, then. I... see. Then the feedback function has nothing to do with it. The feedback function is something else entirely. It's... what is it then? Game theory says nothing about it, here... To us humans, it would be part of a player's strategy, but in game theory it isn't even mentioned.
+
+
+1. A player may occupy more than one position in another's neighbourhood
+2. A player's strategy is an integer
+3. None of the functions are defined -> their definition is clearly left to us.
+4. The objective could very well be for a player to occupy as many positions as possible in other players' neighbourhoods, and that would lead to a high payoff.
+5. None of the functions are clearly defined.
+6. None of the functions are clearly defined.
+7. None of the functions are clearly defined.
+While I said that their definition is clearly left to us, I feel that there is a correct interpretation for each function. So, the degree of freedom we have would actually be lesser than we initially thought.
+We... have to make peace with the fact that there is no clear objective. We are left in the dark here, but everything is pointing towards certain things wanting a positive interpretation. We usually consider a high payoff good, and a possible payoff could be the player's strategy value times the number of times it appears. But then the feedback function has to be a throttle. Not only that, it needs to be uniform for all. Why? To keep things fair and interesting, and because the feedback function is never mentioned as being part of players' strategies. And, the payoff function would also need to be the same for all players. Considering that this is a Java project, and that both payoff and feedback will be methods of a Player class, yeah, that lines up. That adds up. Because every player will then have the same payoff and feedback function...
+
+Think of it like this: if a player is rich enough, they may spawn another player and pay with points. If a player is too poor, other players stop sending them messages. So... players would both give and receive. They receive from players, and in exchange they give. The more a player gives, the more they will receive. Yes, and it will be a gamble, they may give a lot to those who give a lot, expecting a greater return. Or they may give less. But... the feedback has to be the same...? No, it doesn't have to be. We can make it so that it isn't. No one said we had to have a single feedback function for all. So we can simulate a whole society, provided it respects everything we wrote above. It's the other way around: all of the above allows us to create a miniature society.
+
+
+
+So... how confident are you in your understanding of this problem? How confident are you in your interpretation of the text? No, here's the best version of this question: do you think you understood what the professor wants from us?
+
+
+
+
+Points of doubt: the strategies, and subsequently the profile. Is a player's strategy really as simple as a number? Is it really all there is to it?
+
+If it is, then let's make a recap of the entire project: we have a universe of k players, let's assume that initially, each player is in everyone else's neighbourhood. Players have a numbered position in others' neighbourhoods: what does that mean? Nothing, which allows us to endow it with a meaning of our own choosing. The board also has a profile function, which takes as input a player and outputs the messages that player has received from its neighbours. The messages are integers; they have no meaning either, so we can give them one too. Upon receiving messages, a player responds with its own messages, and that's the feedback function. So there's a deep link between the feedback function and the profile function. One would think that the feedback's output depends on the input: that is, the value changes according to what's given. In other words, a player's strategy changes between each transition. The only thing we can do with them is give them an initial strategy. That's it. And then there's the fact that a strategy is basically just a number. Is that really the case? Go check quickly. It is. It very much is. Yeah, we'll have to believe that eventually. Each player also has a payoff function, or rather, the player's message to themselves is the payoff function. It also needs to be defined, it also waits for a meaning. It is only natural for the payoff function to be the same for all players. 
+Players may also spawn other players. That's all the specs say. He really is spoiling us with all this freedom. Oh, and importantly, players may die. They die when they don't receive messages from anyone and therefore have an undefined feedback function. To be precise, the paper says that they die when the feedback function is undefined, but it's the same thing: the feedback function is undefined when they don't receive messages. 
+That's it, that's all we have: a template, and a whole lot of freedom. That's the project. Now, it's up to you to make things interesting.
+
+The feedback function is more interesting than I thought. Since a player's message must be the same to all others, then we have less freedom than initially thought: we can't change the message according to the input. In the sense that even though some players may give more than others we cannot reward them by giving back more. We need to find a way to make this work. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

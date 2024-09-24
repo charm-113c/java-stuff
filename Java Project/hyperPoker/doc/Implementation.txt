@@ -1,0 +1,16 @@
+A model, a view, and a controller. Now let's start with the model: what will we have in it?
+
+Model
+    It will only contain the logic, and it must be independent of either the view or the controller. In other words, it's going to provide the outputs, and nothing else. Do you perhaps feel the need to be fancy and create interfaces or whatnot? Maybe. Maybe we will. But for now. Let's reason.
+
+Before we reason on the model, let's reason on the game itself. The goal of the game is to essentially have all players less rich than oneself in one's own neighbourhood. Well, no, not exactly, the goal is to be the richest, and the best mean to achieve it would be to have the poorest players in the game in one's own neighbourhood. So the gameplan would be to remove as many of the rich players as possible, and only keep a handful of the poorest players. But the poorest player changes from round to round. Or at least, there's no guarantee of it being the same. In fact, the poorest player in one round, if they play it well, will gain a substantial amount of wealth in the next. Is one change per turn too slow? That's what I'm thinking.
+But I want to stick to the original rules. Then, we somehow have to make them work. We need changes to the game rules. I think the way wealth is calculated needs to change. I want a player to swiftly decide from whom to take and to whom to give. There's a complete mismatch between the speed at which the game evolves and the speed at which players can respond. So we either slow things down or allow players to respond more quickly.
+For starters: players know how many players are in each others' neighbourhoods. They can easily keep track of the messages to guess that. In fact, to an extent they can guess what each other player's neighbourhood is. In other words, they can solve the game. For one turn. For exactly one turn. You need incredible computational power to solve the game for multiple turns. You'd need to compute the best move for every player in a given turn in order to build the board for the next turn. But it is possible. Much unlike many other non-cooperative games. I want this to be unsolvable. Wait. You're underestimating the fog of war. No one knows the wealth of other players. So even with all of the knowledge on the neighbourhood structures (that would only be attainable once a certain number of rounds have passed), you would only be able to guess who is wealthy and who is poor.
+Let's trust the current game rules, we'll worry about speed only if we find that we need to worry about speed.
+
+
+But I want to keep on reasoning about the game. See, if the goal is to be the richest, then there's likely to be a fluctuation during the game: one round we lose wealth, the next we gain, and then we lose, and then we gain.
+
+
+
+I want to make new rules. Ones to reward players for good guesses and punish them for bad ones. No. We might be underestimating the power of averages. Sure, there might be large fluctuations of wealth, but that's okay. Let's really trust the current rules. Let's proceed with these, and see what comes out of it.

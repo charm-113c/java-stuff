@@ -1,0 +1,2 @@
+All the above + make val and type enums, implement `equals` and make the deck an iterable
+by implementing `iterable`

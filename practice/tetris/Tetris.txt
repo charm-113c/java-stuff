@@ -1,0 +1,40 @@
+Keep things simple. It's just as you said, excellence is a habit, and there is so much beauty and elegance to simplicity.
+So keep things simple. No clocks, nothing fancy, you have four hours, and you have to program tetris.
+Let's go.
+
+Did he just say that there's a clock? Fair. We'll learn how to wait. 
+
+A matrix represents the game screen, smaller matrices will represent the shapes. What should the class variables be?
+Statics? Private? 
+Private, but not static. Every t seconds one of them will pop up on top of the screen. Wrong, one pops up everytime 
+the previous has been placed. To begin the game we create one. Every t seconds, they will move down.
+The toughest challenge is putting together the game screen and the block shapes. 
+
+When rotating, do we pause the clock? Damn, you're not making it easy. The answer is yes. No. The two things have to 
+be independent. 
+Yes, that does call for threading, which we don't know how to do. We can learn. Assuming that's done, how do we 
+piece everything together?
+We need the current state of the game, i.e. the screen, as well as the coordinates of the current block.
+In other words, going left and right and rotating are conditional movements, they can be restricted. 
+In any case, the screen is necessary. And what are the coordinates? As in, which point of the piece 
+will they be? I think a 3*3 matrix will be useful after all. And we'll need two checks before 
+rotating or moving: 
+1) that there is enough screen space to perform the action
+2) that nothing obstructs the block
+Wait, we don't need a matrix. We can make use of a variable state, which will retain the current orientation 
+of the piece.
+Alternatively, we can always keep the matrix centered. Well, even if we do have the matrix, we'll still 
+need the orientation variable. Having the matrix is a pain, an orientation variable is sufficient.
+    + the square can never rotate, so variable is undef
+    + I-blocks has two states, horizontal and vertical
+    + T-blocks and S-blocks have four states, and will need the most attention
+
+Shit, here comes a new problem: we need to check when a piece has to stop moving. 
+It's when it cannot go down. 
+It's during the clock. Before moving a piece down, we must check that it can go down.
+If it can't, check if game over. If it isn't, throw in the next piece.
+
+Once a block is placed, we have to replace its current screen position with 1s.
+
+I see, with your coordinate thingy, we aren't doing much. Let's draw. It wouldn't be 
+complete without that. After each move, we draw teh current state of the screen.
